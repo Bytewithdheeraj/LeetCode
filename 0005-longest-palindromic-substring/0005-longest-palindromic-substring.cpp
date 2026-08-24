@@ -1,30 +1,34 @@
 class Solution {
 public:
-    bool isPalin(string& s, int left, int right) {
-        while(left < right) {
-            if(s[left] != s[right])
-                return false;
+    bool solve(string &s, int i, int j) {
+        if(i >= j) return true;
 
-            left++;
-            right--;
+        if(s[i] == s[j]) {
+            return solve(s, i + 1, j - 1);
         }
 
-        return true;
+        return false;
     }
 
     string longestPalindrome(string s) {
         int n = s.length();
-        string ans = "";
+
+        int maxLen = 0;
+        int start = 0;
 
         for(int i = 0; i < n; i++) {
             for(int j = i; j < n; j++) {
 
-                if(isPalin(s, i, j) && j - i + 1 > ans.length()) {
-                    ans = s.substr(i, j - i + 1);
+                if(solve(s, i, j)) {
+
+                    if(j - i + 1 > maxLen) {
+                        maxLen = j - i + 1;
+                        start = i;
+                    }
                 }
             }
         }
 
-        return ans;
+        return s.substr(start, maxLen);
     }
 };
