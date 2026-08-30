@@ -6,13 +6,9 @@ public:
         int minIndex = min_element(nums.begin(), nums.end()) - nums.begin();
         int maxIndex = max_element(nums.begin(), nums.end()) - nums.begin();
 
-        if(minIndex > maxIndex)
-            swap(minIndex, maxIndex);
+        int left = min(minIndex, maxIndex);
+        int right = max(minIndex, maxIndex);
 
-        int left = maxIndex + 1;
-        int right = n - minIndex;
-        int mixed = minIndex + 1 + n - maxIndex;
-
-        return min({left, right, mixed});
+        return min({left + 1 + n - right, right + 1, n - left});
     }
 };
