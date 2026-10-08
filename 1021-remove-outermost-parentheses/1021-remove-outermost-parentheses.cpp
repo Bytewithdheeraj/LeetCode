@@ -1,0 +1,24 @@
+class Solution {
+public:
+    string removeOuterParentheses(string s) {
+        stack<int> st;
+        string ans = "";
+        int depth = 0;
+
+        for(auto c : s){
+            if(c == '('){
+                if(depth > 0){
+                    ans += c;
+                }
+                depth++;
+            }
+            else{
+                depth--;
+                if(depth > 0){
+                    ans += c;
+                }
+            }
+        }
+        return ans;
+    }
+};
